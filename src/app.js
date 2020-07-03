@@ -5,6 +5,7 @@ const forecast = require('./utils/forecast');
 const geocode = require('./utils/geocode');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -70,17 +71,6 @@ app.get('/weather', (req, res) => {
   );
 });
 
-app.get('/products', (req, res) => {
-  if (!req.query.search) {
-    // Run this code if the search term is not provided.
-    return res.send({ error: 'You must provide a search term' }); // return the response right away so the function won't continue running the rest of the code. We want to return right away because later in the function, we have another res.send(). We can only send response back once, if we do send twice, it will cause an error.
-  }
-  console.log(req.query.search);
-  res.send({
-    products: [],
-  });
-});
-
 // Set up 404 page handler
 app.get('/help/*', (req, res) => {
   res.render('404', {
@@ -99,6 +89,6 @@ app.get('*', (req, res) => {
 });
 
 // Start up the web server
-app.listen(3000, () => {
-  console.log('Server us up on port 3000');
+app.listen(port, () => {
+  console.log(`Server us up on port ${port}`);
 });

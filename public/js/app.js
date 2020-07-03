@@ -13,18 +13,16 @@ weatherForm.addEventListener('submit', (e) => {
   messageOne.textContent = 'Loading...';
   messageTwo.textContent = '';
 
-  fetch(`http://localhost:3000/weather?address=${location}`).then(
-    (response) => {
-      response.json().then((data) => {
-        // This function is going to run when the JSON data has arrived and been parsed. We have access to the parsed data (a JavaScript Object) as the first and only argument.
-        console.log(data);
-        if (data.error) {
-          messageOne.textContent = data.error;
-        } else {
-          messageOne.textContent = data.location;
-          messageTwo.textContent = data.forecast;
-        }
-      });
-    }
-  );
+  fetch(`/weather?address=${location}`).then((response) => {
+    response.json().then((data) => {
+      // This function is going to run when the JSON data has arrived and been parsed. We have access to the parsed data (a JavaScript Object) as the first and only argument.
+      console.log(data);
+      if (data.error) {
+        messageOne.textContent = data.error;
+      } else {
+        messageOne.textContent = data.location;
+        messageTwo.textContent = data.forecast;
+      }
+    });
+  });
 });
