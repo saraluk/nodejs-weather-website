@@ -13,16 +13,15 @@ const viewsPath = path.join(__dirname, '../templates/views');
 const partialsPath = path.join(__dirname, '../templates/partials');
 
 // Setup handlebars engine and views location.
-app.set('view engine', 'hbs'); // set() method allows us to set a value for a given Express setting. It takes in a setting name and a value we want to set for the setting. In our case, to set up a view engine to use the module that we installed which is hbs.
+app.set('view engine', 'hbs');
 app.set('views', viewsPath);
-hbs.registerPartials(partialsPath); // registerPartials() takes a path to the directory where our partials live
+hbs.registerPartials(partialsPath);
 
 // Setup static directory to serve
-app.use(express.static(publicDirectoryPath)); // use() is a way to customize our server.
+app.use(express.static(publicDirectoryPath));
 
 app.get('', (req, res) => {
   res.render('index', {
-    // render() method allow us to render one of our views. We need to provide the name of the particular view we want to use as the first argument
     title: 'Weather',
     name: 'Saraluk Kaiwansakul',
   });
